@@ -1,0 +1,14 @@
+# Render free-tier deploy for the FastAPI service.
+# The Next.js dashboard deploys separately on Vercel.
+services:
+  - type: web
+    name: gambia-political-risk-api
+    env: python
+    pythonVersion: "3.11"
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn api.main:app --host 0.0.0.0 --port $PORT
+    autoDeploy: true
+    plan: free
+    envVars:
+      - key: CORS_ORIGINS
+        value: "*"

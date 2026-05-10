@@ -1,0 +1,38 @@
+# Data + models (large + sensitive)
+data/raw/*.csv
+data/processed/*.csv
+data/features/*.pkl
+data/features/*.csv
+models/*
+outputs/charts/*.png
+outputs/eda/*.png
+outputs/political_risk_index.csv
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+!data/features/.gitkeep
+!models/.gitkeep
+!outputs/charts/.gitkeep
+!outputs/eda/.gitkeep
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.env
+.env.local
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# Node + Next.js
+dashboard/node_modules/
+dashboard/.next/
+dashboard/out/
+dashboard/.env.local
+
+# OS
+.DS_Store
+Thumbs.db

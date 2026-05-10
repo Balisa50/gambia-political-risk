@@ -1,0 +1,40 @@
+# Core
+pandas==2.2.3
+numpy==2.0.2
+python-dateutil==2.9.0
+tqdm==4.67.1
+
+# Scraping
+beautifulsoup4==4.12.3
+requests==2.32.3
+lxml==5.3.0
+
+# NLP
+nltk==3.9.1
+spacy==3.7.6
+scikit-learn==1.5.2
+gensim==4.3.3
+sentence-transformers==3.3.1
+transformers==4.46.3
+torch==2.5.1
+
+# Topic modelling + dim reduction + interpretability
+umap-learn==0.5.7
+shap==0.46.0
+
+# Plots
+matplotlib==3.9.2
+seaborn==0.13.2
+wordcloud==1.9.4
+
+# API
+fastapi==0.115.5
+uvicorn[standard]==0.32.1
+pydantic==2.10.2
+
+# Macro data for PRI validation
+wbdata==1.0.0
+
+# Notebooks
+jupyter==1.1.1
+ipykernel==6.29.5
