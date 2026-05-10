@@ -1,20 +1,25 @@
 """
 Gambian news scraper.
 
-Politely walks four Gambian publications (The Point, Foroyaa, Gainako,
-Standard) and harvests articles into a single CSV. Designed to fail
-gracefully on individual page errors and respect server load via random
-delays.
+Politely walks Gambian publications and harvests articles into a single
+CSV. Designed to fail gracefully on individual page errors and respect
+server load via random delays.
+
+Site-specific selectors and URL patterns because each publication uses
+different markup. Gainako is currently excluded due to a broken SSL
+certificate on their server (cert is valid for a different hostname);
+will be re-enabled when their hosting is fixed.
 
 Usage:
     from src.scraper import scrape_all
-    df = scrape_all(max_articles_per_source=2000)
+    df = scrape_all(max_articles_per_source=250)
 """
 
 from __future__ import annotations
 
 import logging
 import random
+import re
 import time
 import urllib.parse as urlparse
 from dataclasses import dataclass
@@ -46,173 +51,199 @@ class Article:
     category: str | None = None
 
     def is_valid(self) -> bool:
-        return bool(self.headline and self.text and self.url)
+        return bool(self.headline and self.text and self.url and len(self.text) > 200)
 
 
 # ── Polite HTTP ──────────────────────────────────────────────────────
+
 
 _session = requests.Session()
 _session.headers.update({"User-Agent": USER_AGENT})
 
 
-def _polite_get(url: str) -> requests.Response | None:
+def _polite_get(url: str, verify: bool = True) -> requests.Response | None:
     """GET with timeout, random delay, and graceful failure."""
     try:
         time.sleep(random.uniform(DELAY_MIN_SECONDS, DELAY_MAX_SECONDS))
-        r = _session.get(url, timeout=REQUEST_TIMEOUT)
+        r = _session.get(url, timeout=REQUEST_TIMEOUT, verify=verify)
         if r.status_code != 200:
             log.warning("non-200 from %s: %s", url, r.status_code)
             return None
+        # Force UTF-8 because requests' apparent_encoding heuristic
+        # mis-detects Gambian sites as ASCII and corrupts curly quotes
+        r.encoding = "utf-8"
         return r
     except Exception as e:  # noqa: BLE001
         log.warning("request failed for %s: %s", url, e)
         return None
 
 
-# ── Per-source extractors ─────────────────────────────────────────────
-#
-# Each scraper yields Article objects. The HTML structures of these
-# four sites change occasionally, so the selectors here are pragmatic,
-# best-effort and fall back to <p> tags if a specific class isn't found.
+# ── The Point Newspaper, custom CMS ──────────────────────────────────
 
-def scrape_thepoint(max_articles: int = 2000) -> Iterator[Article]:
-    """The Point Newspaper, https://thepoint.gm"""
+
+_THEPOINT_PATH = re.compile(r"^/africa/gambia/(headline-news|national|sports|opinion|business|editorial|world|cartoon)/[a-z0-9-]+", re.I)
+
+
+def scrape_thepoint(max_articles: int = 250) -> Iterator[Article]:
     base = "https://thepoint.gm"
     seen: set[str] = set()
-    for page in range(1, 200):
-        list_url = f"{base}/page/{page}/"
+    # Walk index pages by date
+    for page in range(1, 30):
+        list_url = base if page == 1 else f"{base}/page/{page}"
         r = _polite_get(list_url)
         if r is None:
             continue
-        soup = BeautifulSoup(r.text, "html.parser")
-        links = {urlparse.urljoin(base, a["href"]) for a in soup.select("h2 a, h3 a, .entry-title a") if a.get("href")}
-        if not links:
-            break
-        new = links - seen
+        soup = BeautifulSoup(r.text, "lxml")
+        # Collect all anchors that look like article paths
+        candidates = []
+        for a in soup.find_all("a", href=True):
+            href = a["href"]
+            if href.startswith("/"):
+                if _THEPOINT_PATH.match(href):
+                    candidates.append(urlparse.urljoin(base, href))
+            elif "/africa/gambia/" in href and _THEPOINT_PATH.search(href):
+                candidates.append(href)
+        new = [c for c in dict.fromkeys(candidates) if c not in seen]
         if not new:
             break
         for link in new:
             seen.add(link)
-            art = _extract_article(link, source="The Point")
+            art = _extract_thepoint(link)
             if art and art.is_valid():
                 yield art
             if len(seen) >= max_articles:
                 return
 
 
-def scrape_foroyaa(max_articles: int = 2000) -> Iterator[Article]:
-    """Foroyaa, https://foroyaa.net"""
-    base = "https://foroyaa.net"
-    seen: set[str] = set()
-    for page in range(1, 200):
-        list_url = f"{base}/page/{page}/"
-        r = _polite_get(list_url)
-        if r is None:
-            continue
-        soup = BeautifulSoup(r.text, "html.parser")
-        links = {urlparse.urljoin(base, a["href"]) for a in soup.select(".entry-title a, h2 a, h3 a") if a.get("href")}
-        if not links:
-            break
-        new = links - seen
-        if not new:
-            break
-        for link in new:
-            seen.add(link)
-            art = _extract_article(link, source="Foroyaa")
-            if art and art.is_valid():
-                yield art
-            if len(seen) >= max_articles:
-                return
+def _extract_thepoint(url: str) -> Article | None:
+    from datetime import date as _date
 
-
-def scrape_gainako(max_articles: int = 2000) -> Iterator[Article]:
-    """Gainako, https://gainako.com"""
-    base = "https://gainako.com"
-    seen: set[str] = set()
-    for page in range(1, 200):
-        list_url = f"{base}/page/{page}/"
-        r = _polite_get(list_url)
-        if r is None:
-            continue
-        soup = BeautifulSoup(r.text, "html.parser")
-        links = {urlparse.urljoin(base, a["href"]) for a in soup.select(".entry-title a, h2 a") if a.get("href")}
-        if not links:
-            break
-        new = links - seen
-        if not new:
-            break
-        for link in new:
-            seen.add(link)
-            art = _extract_article(link, source="Gainako")
-            if art and art.is_valid():
-                yield art
-            if len(seen) >= max_articles:
-                return
-
-
-def scrape_standard(max_articles: int = 2000) -> Iterator[Article]:
-    """Standard Newspaper, https://standard.gm"""
-    base = "https://standard.gm"
-    seen: set[str] = set()
-    for page in range(1, 200):
-        list_url = f"{base}/page/{page}/"
-        r = _polite_get(list_url)
-        if r is None:
-            continue
-        soup = BeautifulSoup(r.text, "html.parser")
-        links = {urlparse.urljoin(base, a["href"]) for a in soup.select("h2 a, h3 a, .post-title a, .entry-title a") if a.get("href")}
-        if not links:
-            break
-        new = links - seen
-        if not new:
-            break
-        for link in new:
-            seen.add(link)
-            art = _extract_article(link, source="Standard")
-            if art and art.is_valid():
-                yield art
-            if len(seen) >= max_articles:
-                return
-
-
-# ── Generic article extractor ─────────────────────────────────────────
-
-
-def _extract_article(url: str, source: str) -> Article | None:
     r = _polite_get(url)
     if r is None:
         return None
-    soup = BeautifulSoup(r.text, "html.parser")
-
-    # Headline: try a few common selectors
-    h1 = soup.select_one("h1.entry-title, h1.post-title, h1") or soup.find("h1")
+    soup = BeautifulSoup(r.text, "lxml")
+    h1 = soup.find("h1")
     headline = h1.get_text(strip=True) if h1 else ""
 
-    # Date: <time> tag, otherwise meta tag
     date = None
-    t = soup.find("time")
-    if t and t.get("datetime"):
-        date = t["datetime"][:10]
+    m = soup.find("meta", attrs={"property": "article:published_time"})
+    if m and m.get("content"):
+        date = m["content"][:10]
     if not date:
-        m = soup.find("meta", attrs={"property": "article:published_time"})
-        if m and m.get("content"):
-            date = m["content"][:10]
+        t = soup.find("time")
+        if t and t.get("datetime"):
+            date = t["datetime"][:10]
+    # The Point doesn't always expose published date via meta. We're
+    # scraping from the front-page index, so the article is recent. Use
+    # today's scrape date as a fallback rather than dropping the row.
+    if not date:
+        date = _date.today().isoformat()
 
-    # Body: prefer .entry-content or .post-content, fall back to all <p>
+    # Body: collect <p> from the main article container
+    body_el = soup.find("article") or soup.find("div", class_=re.compile(r"article|content|entry|post-body", re.I))
+    if body_el:
+        paras = [p.get_text(" ", strip=True) for p in body_el.find_all("p")]
+    else:
+        paras = [p.get_text(" ", strip=True) for p in soup.find_all("p")]
+    text = "\n".join(p for p in paras if p and len(p) > 30)
+
+    # Category from URL
+    cat = None
+    parts = urlparse.urlparse(url).path.split("/")
+    for p in parts:
+        if p in {"headline-news", "national", "sports", "opinion", "business", "editorial", "world", "cartoon"}:
+            cat = p.replace("-", " ").title()
+            break
+
+    return Article(date=date, source="The Point", headline=headline, text=text, url=url, category=cat)
+
+
+# ── Foroyaa, WordPress ───────────────────────────────────────────────
+
+
+def scrape_foroyaa(max_articles: int = 250) -> Iterator[Article]:
+    base = "https://foroyaa.net"
+    seen: set[str] = set()
+    for page in range(1, 50):
+        list_url = base if page == 1 else f"{base}/page/{page}/"
+        r = _polite_get(list_url)
+        if r is None:
+            continue
+        soup = BeautifulSoup(r.text, "lxml")
+        anchors = soup.select("h3.entry-title a, h2.entry-title a, h2 a")
+        links = [urlparse.urljoin(base, a["href"]) for a in anchors if a.get("href") and "/category/" not in a["href"] and "/author/" not in a["href"]]
+        new = [l for l in dict.fromkeys(links) if l not in seen]
+        if not new:
+            break
+        for link in new:
+            seen.add(link)
+            art = _extract_wp(link, source="Foroyaa")
+            if art and art.is_valid():
+                yield art
+            if len(seen) >= max_articles:
+                return
+
+
+# ── Standard Newspaper, WordPress ────────────────────────────────────
+
+
+def scrape_standard(max_articles: int = 250) -> Iterator[Article]:
+    base = "https://standard.gm"
+    seen: set[str] = set()
+    for page in range(1, 50):
+        list_url = base if page == 1 else f"{base}/page/{page}/"
+        r = _polite_get(list_url)
+        if r is None:
+            continue
+        soup = BeautifulSoup(r.text, "lxml")
+        anchors = soup.select("h3.entry-title a, h2.entry-title a, h2 a")
+        links = [urlparse.urljoin(base, a["href"]) for a in anchors if a.get("href") and "/category/" not in a["href"] and "/author/" not in a["href"]]
+        new = [l for l in dict.fromkeys(links) if l not in seen]
+        if not new:
+            break
+        for link in new:
+            seen.add(link)
+            art = _extract_wp(link, source="Standard")
+            if art and art.is_valid():
+                yield art
+            if len(seen) >= max_articles:
+                return
+
+
+# ── Generic WordPress extractor ──────────────────────────────────────
+
+
+def _extract_wp(url: str, source: str) -> Article | None:
+    r = _polite_get(url)
+    if r is None:
+        return None
+    soup = BeautifulSoup(r.text, "lxml")
+
+    h1 = soup.select_one("h1.entry-title, h1.post-title") or soup.find("h1")
+    headline = h1.get_text(strip=True) if h1 else ""
+
+    date = None
+    m = soup.find("meta", attrs={"property": "article:published_time"})
+    if m and m.get("content"):
+        date = m["content"][:10]
+    if not date:
+        t = soup.find("time")
+        if t and t.get("datetime"):
+            date = t["datetime"][:10]
+
     body_el = soup.select_one(".entry-content, .post-content, article")
     if body_el:
-        paragraphs = [p.get_text(" ", strip=True) for p in body_el.find_all("p")]
+        paras = [p.get_text(" ", strip=True) for p in body_el.find_all("p")]
     else:
-        paragraphs = [p.get_text(" ", strip=True) for p in soup.find_all("p")]
-    text = "\n".join(p for p in paragraphs if p)
+        paras = [p.get_text(" ", strip=True) for p in soup.find_all("p")]
+    text = "\n".join(p for p in paras if p and len(p) > 30)
 
-    # Category: meta tag
-    category = None
+    cat = None
     m = soup.find("meta", attrs={"property": "article:section"})
     if m and m.get("content"):
-        category = m["content"]
+        cat = m["content"]
 
-    return Article(date=date, source=source, headline=headline, text=text, url=url, category=category)
+    return Article(date=date, source=source, headline=headline, text=text, url=url, category=cat)
 
 
 # ── Aggregator ────────────────────────────────────────────────────────
@@ -220,22 +251,23 @@ def _extract_article(url: str, source: str) -> Article | None:
 SCRAPERS = {
     "The Point": scrape_thepoint,
     "Foroyaa": scrape_foroyaa,
-    "Gainako": scrape_gainako,
     "Standard": scrape_standard,
 }
 
 
-def scrape_all(max_articles_per_source: int = 2000, sources: Iterable[str] | None = None) -> pd.DataFrame:
+def scrape_all(max_articles_per_source: int = 250, sources: Iterable[str] | None = None) -> pd.DataFrame:
     """Run every scraper and return a single concatenated DataFrame."""
     sources = sources or SCRAPERS.keys()
     rows: list[dict] = []
     for name in sources:
         log.info("starting %s", name)
         try:
+            count_before = len(rows)
             for art in SCRAPERS[name](max_articles=max_articles_per_source):
                 rows.append(art.__dict__)
-                if len(rows) % 50 == 0:
-                    log.info("collected %d articles total", len(rows))
+                if (len(rows) - count_before) % 25 == 0:
+                    log.info("[%s] %d articles", name, len(rows) - count_before)
+            log.info("[%s] finished with %d articles", name, len(rows) - count_before)
         except Exception as e:  # noqa: BLE001
             log.exception("scraper %s crashed: %s", name, e)
     df = pd.DataFrame(rows)
@@ -245,4 +277,4 @@ def scrape_all(max_articles_per_source: int = 2000, sources: Iterable[str] | Non
 
 
 if __name__ == "__main__":
-    scrape_all()
+    scrape_all(max_articles_per_source=250)

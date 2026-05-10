@@ -27,6 +27,7 @@ from .config import (
     SENTIMENT_CSV,
     TOPICS_CSV,
 )
+from .features import FeatureBundle  # noqa: F401  needed for pickle.load
 
 log = logging.getLogger(__name__)
 

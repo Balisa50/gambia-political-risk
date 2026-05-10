@@ -4,9 +4,9 @@ data/processed/*.csv
 data/features/*.pkl
 data/features/*.csv
 models/*
-outputs/charts/*.png
+# outputs/charts/*.png  # commit charts so they show in the README
 outputs/eda/*.png
-outputs/political_risk_index.csv
+# outputs/political_risk_index.csv  # commit this so the deployed API can serve it
 !data/raw/.gitkeep
 !data/processed/.gitkeep
 !data/features/.gitkeep
@@ -36,3 +36,4 @@ dashboard/.env.local
 # OS
 .DS_Store
 Thumbs.db
+data/raw/scrape.log
