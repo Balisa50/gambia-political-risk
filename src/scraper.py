@@ -210,6 +210,84 @@ def scrape_standard(max_articles: int = 250) -> Iterator[Article]:
                 return
 
 
+# ── The Fatu Network, WordPress ──────────────────────────────────────
+
+
+def scrape_fatu_network(max_articles: int = 250) -> Iterator[Article]:
+    base = "https://fatunetwork.net"
+    seen: set[str] = set()
+    for page in range(1, 50):
+        list_url = base if page == 1 else f"{base}/page/{page}/"
+        r = _polite_get(list_url)
+        if r is None:
+            continue
+        soup = BeautifulSoup(r.text, "lxml")
+        anchors = soup.select("h3.entry-title a, h2.entry-title a, h2 a")
+        links = [urlparse.urljoin(base, a["href"]) for a in anchors if a.get("href") and "/category/" not in a["href"] and "/author/" not in a["href"] and "/tag/" not in a["href"]]
+        new = [l for l in dict.fromkeys(links) if l not in seen]
+        if not new:
+            break
+        for link in new:
+            seen.add(link)
+            art = _extract_wp(link, source="Fatu Network")
+            if art and art.is_valid():
+                yield art
+            if len(seen) >= max_articles:
+                return
+
+
+# ── Kerr Fatou Media, WordPress ──────────────────────────────────────
+
+
+def scrape_kerr_fatou(max_articles: int = 250) -> Iterator[Article]:
+    base = "https://kerrfatou.com"
+    seen: set[str] = set()
+    for page in range(1, 50):
+        list_url = base if page == 1 else f"{base}/page/{page}/"
+        r = _polite_get(list_url)
+        if r is None:
+            continue
+        soup = BeautifulSoup(r.text, "lxml")
+        anchors = soup.select("h3.entry-title a, h2.entry-title a, h2 a")
+        links = [urlparse.urljoin(base, a["href"]) for a in anchors if a.get("href") and "/category/" not in a["href"] and "/author/" not in a["href"] and "/tag/" not in a["href"]]
+        new = [l for l in dict.fromkeys(links) if l not in seen]
+        if not new:
+            break
+        for link in new:
+            seen.add(link)
+            art = _extract_wp(link, source="Kerr Fatou")
+            if art and art.is_valid():
+                yield art
+            if len(seen) >= max_articles:
+                return
+
+
+# ── Kaironews, WordPress ─────────────────────────────────────────────
+
+
+def scrape_kaironews(max_articles: int = 250) -> Iterator[Article]:
+    base = "https://kaironews.com"
+    seen: set[str] = set()
+    for page in range(1, 50):
+        list_url = base if page == 1 else f"{base}/page/{page}/"
+        r = _polite_get(list_url)
+        if r is None:
+            continue
+        soup = BeautifulSoup(r.text, "lxml")
+        anchors = soup.select("h3.entry-title a, h2.entry-title a, h2 a")
+        links = [urlparse.urljoin(base, a["href"]) for a in anchors if a.get("href") and "/category/" not in a["href"] and "/author/" not in a["href"] and "/tag/" not in a["href"]]
+        new = [l for l in dict.fromkeys(links) if l not in seen]
+        if not new:
+            break
+        for link in new:
+            seen.add(link)
+            art = _extract_wp(link, source="Kaironews")
+            if art and art.is_valid():
+                yield art
+            if len(seen) >= max_articles:
+                return
+
+
 # ── Generic WordPress extractor ──────────────────────────────────────
 
 
@@ -252,6 +330,9 @@ SCRAPERS = {
     "The Point": scrape_thepoint,
     "Foroyaa": scrape_foroyaa,
     "Standard": scrape_standard,
+    "Fatu Network": scrape_fatu_network,
+    "Kerr Fatou": scrape_kerr_fatou,
+    "Kaironews": scrape_kaironews,
 }
 
 
