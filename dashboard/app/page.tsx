@@ -5,7 +5,7 @@ import {
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ReferenceLine, ResponsiveContainer,
   BarChart, Bar, Cell, PieChart, Pie,
 } from "recharts";
-import { ArrowUpRight, ArrowDownRight, Minus, ExternalLink, Newspaper, Tag, ThumbsUp, ThumbsDown } from "lucide-react";
+import { ArrowUpRight, ArrowDownRight, Minus, ThumbsUp, ThumbsDown } from "lucide-react";
 
 interface Headline { headline: string; source: string; url: string; date?: string; sentiment?: number; }
 interface Topic {
@@ -19,8 +19,6 @@ interface Source {
 }
 interface PriPoint {
   week: string; pri: number; n_articles: number;
-  mean_sentiment: number | null; negative_share: number | null;
-  political_share: number | null; crime_share: number | null;
   event: string | null;
 }
 interface Dashboard {
@@ -42,7 +40,6 @@ const ELECTION_EVENTS = [
   { date: "2017-01-19", label: "Jammeh exile" },
   { date: "2020-03-17", label: "COVID-19 declared" },
   { date: "2021-12-04", label: "2021 election" },
-  { date: "2022-04-09", label: "2022 NA elections" },
 ];
 
 const SENTIMENT_COLORS = { positive: "#34d399", negative: "#fb7185", neutral: "#94a3b8" };
@@ -67,8 +64,8 @@ export default function HomePage() {
     return { dir: "stable", icon: Minus, color: "text-white/55" };
   }, [data]);
 
-  if (loading) return <main className="mx-auto max-w-6xl px-6 py-16 text-white/55">Loading dashboard…</main>;
-  if (!data) return <main className="mx-auto max-w-6xl px-6 py-16 text-rose-300">Failed to load data. Try refreshing.</main>;
+  if (loading) return <main className="mx-auto max-w-6xl px-6 py-16 text-white/55">Loading…</main>;
+  if (!data) return <main className="mx-auto max-w-6xl px-6 py-16 text-rose-300">Failed to load data.</main>;
 
   const TrendIcon = trend.icon;
   const totalSent = data.sentiment_distribution.positive + data.sentiment_distribution.negative + data.sentiment_distribution.neutral;
@@ -80,42 +77,38 @@ export default function HomePage() {
 
   return (
     <main className="mx-auto max-w-6xl px-6 py-12">
-      {/* ── HERO ──────────────────────────────────────────────────── */}
+      {/* ── HERO ─────────────────────────────────────────────────── */}
       <header className="mb-12">
-        <p className="font-mono text-xs uppercase tracking-[0.32em] text-accent/85">~/gambia/political-risk-index</p>
+        <p className="font-mono text-xs uppercase tracking-[0.32em] text-accent/85">The Gambia · news climate</p>
         <h1 className="mt-3 text-balance text-[clamp(2rem,5vw,3.5rem)] font-semibold leading-tight">
-          What is The Gambia&apos;s news climate like this week?
+          How is the news in The Gambia this week?
         </h1>
-        <p className="mt-4 max-w-3xl text-pretty text-base leading-relaxed text-white/65">
-          I scraped <strong className="text-white">{data.summary.n_articles_total} articles</strong> from{" "}
-          <strong className="text-white">{data.summary.n_sources} Gambian news publications</strong>, ran them
-          through sentiment analysis and topic modelling, and condensed it all into a single weekly score
-          from 0 to 100. <strong className="text-white">Higher = more positive, calmer news environment.</strong>{" "}
-          Lower = more political stress, crime, and negative coverage. Below is what the data says — with the
-          actual headlines so you can see what&apos;s driving each number.
+        <p className="mt-4 max-w-2xl text-pretty text-base leading-relaxed text-white/65">
+          A single score from 0 to 100 that summarises the tone of Gambian news coverage week by week.{" "}
+          Higher means calmer, more positive reporting. Lower means more negative coverage, political stress, and crime.
         </p>
       </header>
 
-      {/* ── TOP-LEVEL STATS ───────────────────────────────────────── */}
+      {/* ── HEADLINE STATS ───────────────────────────────────────── */}
       <section className="mb-12 grid grid-cols-2 gap-4 md:grid-cols-4">
         <div className="rounded-2xl border border-accent/30 bg-accent/[0.04] p-5">
-          <p className="font-mono text-[10px] uppercase tracking-wider text-accent/85">PRI this week</p>
-          <p className="mt-2 text-4xl font-semibold tabular-nums">{data.summary.current_pri.toFixed(1)}</p>
+          <p className="font-mono text-[10px] uppercase tracking-wider text-accent/85">This week</p>
+          <p className="mt-2 text-4xl font-semibold tabular-nums">{data.summary.current_pri.toFixed(0)}</p>
           <p className={`mt-2 inline-flex items-center gap-1 text-xs ${trend.color}`}>
             <TrendIcon className="h-3.5 w-3.5" /> {trend.dir} ({data.summary.delta_4w >= 0 ? "+" : ""}
-            {data.summary.delta_4w.toFixed(1)} vs 4 wks ago)
+            {data.summary.delta_4w.toFixed(1)} vs a month ago)
           </p>
         </div>
-        <Stat label="Articles analysed" value={data.summary.n_articles_total.toLocaleString()} />
-        <Stat label="News sources" value={data.summary.n_sources.toString()} />
-        <Stat label="Weeks covered" value={data.summary.n_weeks.toString()} />
+        <Stat label="Articles read" value={data.summary.n_articles_total.toLocaleString()} />
+        <Stat label="Newspapers" value={data.summary.n_sources.toString()} />
+        <Stat label="Weeks tracked" value={data.summary.n_weeks.toString()} />
       </section>
 
-      {/* ── PRI CHART ─────────────────────────────────────────────── */}
+      {/* ── PRI CHART ────────────────────────────────────────────── */}
       <section className="mb-12 rounded-2xl border border-white/10 bg-surface p-5 md:p-7">
         <div className="mb-4 flex items-baseline justify-between">
-          <h2 className="text-lg font-medium">Weekly news climate, {data.summary.first_week} → {data.summary.last_week}</h2>
-          <p className="text-xs text-white/45">red dashes = known events</p>
+          <h2 className="text-lg font-medium">The news climate over time</h2>
+          <p className="text-xs text-white/45">dashed lines = major events</p>
         </div>
         <div className="h-96 w-full">
           <ResponsiveContainer>
@@ -130,7 +123,7 @@ export default function HomePage() {
               <Tooltip
                 contentStyle={{ background: "#0b0d12", border: "1px solid #1a1d24", borderRadius: 8 }}
                 labelFormatter={(v) => new Date(v as number).toLocaleDateString()}
-                formatter={(value: number) => [value.toFixed(1), "PRI"]}
+                formatter={(value: number) => [value.toFixed(1), "Score"]}
               />
               <Line type="monotone" dataKey="pri" stroke="#00f0ff" strokeWidth={2} dot={{ r: 2.5 }} />
               {ELECTION_EVENTS.filter((e) => {
@@ -147,13 +140,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── SENTIMENT + SOURCES ───────────────────────────────────── */}
+      {/* ── TONE + SOURCES ───────────────────────────────────────── */}
       <section className="mb-12 grid grid-cols-1 gap-6 md:grid-cols-5">
         <div className="rounded-2xl border border-white/10 bg-surface p-5 md:col-span-2">
-          <h3 className="mb-1 text-base font-medium">Tone across all coverage</h3>
-          <p className="mb-4 text-xs text-white/55">
-            Each article classified by distilBERT-SST2 fine-tuned on Stanford Sentiment Treebank.
-          </p>
+          <h3 className="mb-4 text-base font-medium">Overall tone of coverage</h3>
           <div className="h-56">
             <ResponsiveContainer>
               <PieChart>
@@ -176,10 +166,7 @@ export default function HomePage() {
         </div>
 
         <div className="rounded-2xl border border-white/10 bg-surface p-5 md:col-span-3">
-          <h3 className="mb-1 text-base font-medium">Where the articles came from</h3>
-          <p className="mb-4 text-xs text-white/55">
-            Articles per publication, coloured by their average tone (green = positive lean, red = negative lean).
-          </p>
+          <h3 className="mb-4 text-base font-medium">Coverage by newspaper</h3>
           <div className="h-56">
             <ResponsiveContainer>
               <BarChart data={data.sources} layout="vertical" margin={{ left: 10, right: 30 }}>
@@ -188,10 +175,7 @@ export default function HomePage() {
                 <YAxis type="category" dataKey="source" stroke="#aaa" width={100} fontSize={12} />
                 <Tooltip
                   contentStyle={{ background: "#0b0d12", border: "1px solid #1a1d24", borderRadius: 8 }}
-                  formatter={(value: number, name: string, props) => {
-                    const ms = props.payload.mean_sentiment as number;
-                    return [`${value} articles · tone ${ms.toFixed(2)}`, props.payload.source];
-                  }}
+                  formatter={(value: number, _name: string, props) => [`${value} articles`, props.payload.source]}
                 />
                 <Bar dataKey="n_articles">
                   {data.sources.map((s, i) => (
@@ -201,26 +185,18 @@ export default function HomePage() {
               </BarChart>
             </ResponsiveContainer>
           </div>
+          <p className="mt-2 text-[11px] text-white/40">Bar colour reflects the newspaper&apos;s average tone — green leans positive, red leans negative.</p>
         </div>
       </section>
 
-      {/* ── TOPICS ────────────────────────────────────────────────── */}
+      {/* ── WHAT THE NEWS IS ABOUT ───────────────────────────────── */}
       <section className="mb-12">
-        <h2 className="mb-2 flex items-center gap-2 text-lg font-medium">
-          <Tag className="h-4 w-4 text-accent" /> What Gambian news is actually about
-        </h2>
-        <p className="mb-5 text-sm text-white/60">
-          K-Means clustering on sentence-transformer embeddings (all-MiniLM-L6-v2) groups the 391 articles
-          into 8 themes. Each card shows a representative positive and negative headline so you can sanity-check the model.
-        </p>
+        <h2 className="mb-5 text-lg font-medium">What the news is about</h2>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           {data.topics.map((t) => (
             <article key={t.id} className="rounded-2xl border border-white/10 bg-surface p-5">
               <header className="mb-3 flex items-start justify-between gap-3">
-                <div>
-                  <h3 className="text-base font-semibold">{t.label}</h3>
-                  <p className="mt-0.5 text-[11px] text-white/45">{t.keywords.slice(0, 6).join(" · ")}</p>
-                </div>
+                <h3 className="text-base font-semibold">{t.label}</h3>
                 <span className="shrink-0 rounded-full bg-white/5 px-2.5 py-1 text-[10px] font-mono uppercase tracking-wider text-white/65">
                   {t.n_articles} articles
                 </span>
@@ -232,15 +208,15 @@ export default function HomePage() {
               {t.sample_positive[0] && (
                 <a href={t.sample_positive[0].url} target="_blank" rel="noreferrer noopener"
                   className="mb-2 block rounded-lg border border-emerald-400/15 bg-emerald-400/[0.04] p-3 text-sm text-white/80 hover:border-emerald-400/30">
-                  <span className="font-mono text-[10px] uppercase tracking-wider text-emerald-300/75">positive sample · {t.sample_positive[0].source}</span>
-                  <p className="mt-1 leading-snug">{t.sample_positive[0].headline}</p>
+                  <p className="leading-snug">{t.sample_positive[0].headline}</p>
+                  <p className="mt-1.5 font-mono text-[10px] uppercase tracking-wider text-emerald-300/65">{t.sample_positive[0].source}</p>
                 </a>
               )}
               {t.sample_negative[0] && (
                 <a href={t.sample_negative[0].url} target="_blank" rel="noreferrer noopener"
                   className="block rounded-lg border border-rose-400/15 bg-rose-400/[0.04] p-3 text-sm text-white/80 hover:border-rose-400/30">
-                  <span className="font-mono text-[10px] uppercase tracking-wider text-rose-300/75">negative sample · {t.sample_negative[0].source}</span>
-                  <p className="mt-1 leading-snug">{t.sample_negative[0].headline}</p>
+                  <p className="leading-snug">{t.sample_negative[0].headline}</p>
+                  <p className="mt-1.5 font-mono text-[10px] uppercase tracking-wider text-rose-300/65">{t.sample_negative[0].source}</p>
                 </a>
               )}
             </article>
@@ -248,37 +224,14 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── MOST POSITIVE / NEGATIVE RECENT HEADLINES ─────────────── */}
+      {/* ── HEADLINE LISTS ───────────────────────────────────────── */}
       <section className="mb-12 grid grid-cols-1 gap-6 md:grid-cols-2">
         <HeadlineList title="Most positive recent headlines" icon={ThumbsUp} accent="emerald" items={data.most_positive} />
         <HeadlineList title="Most negative recent headlines" icon={ThumbsDown} accent="rose" items={data.most_negative} />
       </section>
 
-      {/* ── METHODOLOGY ───────────────────────────────────────────── */}
-      <section className="rounded-2xl border border-white/10 bg-surface p-5 md:p-7">
-        <h2 className="mb-4 flex items-center gap-2 text-lg font-medium">
-          <Newspaper className="h-4 w-4 text-accent" /> How this was built
-        </h2>
-        <ol className="ml-5 list-decimal space-y-2.5 text-sm leading-relaxed text-white/70">
-          <li><strong className="text-white/90">Scrape</strong> articles politely from six Gambian publications with 1-3s random delays and per-page failure tolerance.</li>
-          <li><strong className="text-white/90">Preprocess</strong> with NLTK: lowercase, strip HTML/URLs, tokenise, lemmatise, drop stopwords, dedupe.</li>
-          <li><strong className="text-white/90">Featurise</strong>: TF-IDF (8 355 features, bigrams) plus sentence-transformer embeddings (all-MiniLM-L6-v2, 384-d).</li>
-          <li><strong className="text-white/90">Score sentiment</strong> with VADER (lexicon baseline) and distilBERT-SST2 (transformer). DistilBERT&apos;s confidence is used downstream.</li>
-          <li><strong className="text-white/90">Cluster topics</strong> with K-Means on the embeddings (silhouette-validated), with top TF-IDF terms surfaced per cluster.</li>
-          <li><strong className="text-white/90">Composite PRI</strong>: 40 % mean sentiment + 30 % (1 − negative share) + 20 % (1 − political prevalence) + 10 % (1 − crime prevalence), min-max normalised.</li>
-          <li><strong className="text-white/90">Validate</strong>: annotate the chart with known Gambian events to sanity-check that turbulence shows up where it should.</li>
-        </ol>
-        <p className="mt-5 text-xs text-white/40">
-          Data generated {data.summary.last_week}. Sources: The Point · Foroyaa · Standard · Kaironews · The Voice · Alkamba Times.
-        </p>
-      </section>
-
       <footer className="mt-12 text-center text-xs text-white/35">
-        Built by Abdoulie Balisa.{" "}
-        <a href="https://balisa50.github.io" target="_blank" rel="noreferrer noopener" className="underline-offset-2 hover:text-accent hover:underline">portfolio</a>{" "}·{" "}
-        <a href="https://github.com/Balisa50/gambia-political-risk" target="_blank" rel="noreferrer noopener" className="underline-offset-2 hover:text-accent hover:underline">
-          source <ExternalLink className="ml-0.5 inline h-3 w-3" />
-        </a>
+        Built by Abdoulie Balisa · data refreshed {data.summary.last_week}
       </footer>
     </main>
   );
@@ -310,7 +263,7 @@ function HeadlineList({
               className={`block rounded-lg border bg-white/[0.02] p-3 text-sm text-white/80 transition ${borderClass}`}>
               <p className="leading-snug">{h.headline}</p>
               <p className="mt-1.5 font-mono text-[10px] uppercase tracking-wider text-white/45">
-                {h.source} · {h.date} · score {h.sentiment?.toFixed(2)}
+                {h.source} · {h.date}
               </p>
             </a>
           </li>
