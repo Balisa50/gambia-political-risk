@@ -326,6 +326,58 @@ def _extract_wp(url: str, source: str) -> Article | None:
 
 # ── Aggregator ────────────────────────────────────────────────────────
 
+# ── The Voice, WordPress ─────────────────────────────────────────────
+
+
+def scrape_voice(max_articles: int = 250) -> Iterator[Article]:
+    base = "https://www.voicegambia.com"
+    seen: set[str] = set()
+    for page in range(1, 50):
+        list_url = base if page == 1 else f"{base}/page/{page}/"
+        r = _polite_get(list_url)
+        if r is None:
+            continue
+        soup = BeautifulSoup(r.text, "lxml")
+        anchors = soup.select("h3 a, h2.entry-title a, h3.entry-title a, h2 a")
+        links = [urlparse.urljoin(base, a["href"]) for a in anchors if a.get("href") and "/category/" not in a["href"] and "/author/" not in a["href"] and "/tag/" not in a["href"]]
+        new = [l for l in dict.fromkeys(links) if l not in seen]
+        if not new:
+            break
+        for link in new:
+            seen.add(link)
+            art = _extract_wp(link, source="The Voice")
+            if art and art.is_valid():
+                yield art
+            if len(seen) >= max_articles:
+                return
+
+
+# ── Alkamba Times, WordPress ─────────────────────────────────────────
+
+
+def scrape_alkamba(max_articles: int = 250) -> Iterator[Article]:
+    base = "https://alkambatimes.com"
+    seen: set[str] = set()
+    for page in range(1, 50):
+        list_url = base if page == 1 else f"{base}/page/{page}/"
+        r = _polite_get(list_url)
+        if r is None:
+            continue
+        soup = BeautifulSoup(r.text, "lxml")
+        anchors = soup.select("h3.entry-title a, h2.entry-title a, h3 a, h2 a")
+        links = [urlparse.urljoin(base, a["href"]) for a in anchors if a.get("href") and "/category/" not in a["href"] and "/author/" not in a["href"] and "/tag/" not in a["href"]]
+        new = [l for l in dict.fromkeys(links) if l not in seen]
+        if not new:
+            break
+        for link in new:
+            seen.add(link)
+            art = _extract_wp(link, source="Alkamba Times")
+            if art and art.is_valid():
+                yield art
+            if len(seen) >= max_articles:
+                return
+
+
 SCRAPERS = {
     "The Point": scrape_thepoint,
     "Foroyaa": scrape_foroyaa,
@@ -333,6 +385,8 @@ SCRAPERS = {
     "Fatu Network": scrape_fatu_network,
     "Kerr Fatou": scrape_kerr_fatou,
     "Kaironews": scrape_kaironews,
+    "The Voice": scrape_voice,
+    "Alkamba Times": scrape_alkamba,
 }
 
 

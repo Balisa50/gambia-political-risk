@@ -65,7 +65,7 @@ export default function HomePage() {
           A weekly 0-100 score derived from sentiment, topic prevalence, and crime coverage across multiple Gambian news publications. Higher means a more stable, positive news environment. Built end-to-end from a custom scraping pipeline, TF-IDF + sentence-transformer embeddings, VADER + distilBERT sentiment, LDA + K-Means topic models, and a weighted composite index.
         </p>
         <p className="mt-3 text-xs text-white/45">
-          Sources: The Point Newspaper · Foroyaa · Standard Newspaper · Kaironews ·{" "}
+          Sources: The Point · Foroyaa · Standard · Kaironews · The Voice · Alkamba Times ·{" "}
           <a href="https://github.com/Balisa50/gambia-political-risk" target="_blank" rel="noreferrer noopener" className="underline-offset-2 hover:text-accent hover:underline">
             source on GitHub
             <ExternalLink className="ml-0.5 inline h-3 w-3" />
