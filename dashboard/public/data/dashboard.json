@@ -1,0 +1,996 @@
+{
+  "summary": {
+    "current_pri": 62.01590047297625,
+    "current_week": "2026-05-04",
+    "delta_4w": 20.699823367499157,
+    "n_articles_total": 391,
+    "n_sources": 6,
+    "n_weeks": 56,
+    "first_week": "2018-08-27",
+    "last_week": "2026-05-04"
+  },
+  "pri_series": [
+    {
+      "week": "2018-08-27",
+      "pri": 79.83297211583061,
+      "n_articles": 1,
+      "mean_sentiment": 0.998132050037384,
+      "negative_share": 0.0,
+      "political_share": 1.0,
+      "crime_share": 0.0,
+      "event": "Jammeh exile"
+    },
+    {
+      "week": "2019-07-15",
+      "pri": 69.57442820677751,
+      "n_articles": 1,
+      "mean_sentiment": 0.9955379962921144,
+      "negative_share": 1.0,
+      "political_share": 0.0,
+      "crime_share": 0.0,
+      "event": null
+    },
+    {
+      "week": "2019-09-16",
+      "pri": 36.667396874049054,
+      "n_articles": 1,
+      "mean_sentiment": 0.9663708209991456,
+      "negative_share": 1.0,
+      "political_share": 1.0,
+      "crime_share": 1.0,
+      "event": null
+    },
+    {
+      "week": "2019-11-04",
+      "pri": 57.95496882856072,
+      "n_articles": 1,
+      "mean_sentiment": 0.7786230444908142,
+      "negative_share": 0.0,
+      "political_share": 1.0,
+      "crime_share": 0.0,
+      "event": null
+    },
+    {
+      "week": "2019-12-02",
+      "pri": 64.6600325221992,
+      "n_articles": 1,
+      "mean_sentiment": 0.9462302923202516,
+      "negative_share": 0.0,
+      "political_share": 1.0,
+      "crime_share": 1.0,
+      "event": null
+    },
+    {
+      "week": "2020-03-16",
+      "pri": 56.705559739602606,
+      "n_articles": 1,
+      "mean_sentiment": 0.9667537212371826,
+      "negative_share": 1.0,
+      "political_share": 0.0,
+      "crime_share": 1.0,
+      "event": "COVID-19 declared"
+    },
+    {
+      "week": "2021-07-12",
+      "pri": 39.83098199130377,
+      "n_articles": 1,
+      "mean_sentiment": 0.9981120824813844,
+      "negative_share": 1.0,
+      "political_share": 1.0,
+      "crime_share": 1.0,
+      "event": null
+    },
+    {
+      "week": "2021-09-20",
+      "pri": 69.75940879638013,
+      "n_articles": 1,
+      "mean_sentiment": 0.9973939657211304,
+      "negative_share": 1.0,
+      "political_share": 0.0,
+      "crime_share": 0.0,
+      "event": "2021 presidential election"
+    },
+    {
+      "week": "2022-05-09",
+      "pri": 69.69753968627619,
+      "n_articles": 2,
+      "mean_sentiment": 0.9967732131481172,
+      "negative_share": 0.0,
+      "political_share": 1.0,
+      "crime_share": 1.0,
+      "event": "2022 National Assembly elections"
+    },
+    {
+      "week": "2023-06-05",
+      "pri": 68.07717732618455,
+      "n_articles": 1,
+      "mean_sentiment": 0.9805155992507936,
+      "negative_share": 1.0,
+      "political_share": 0.0,
+      "crime_share": 0.0,
+      "event": null
+    },
+    {
+      "week": "2023-07-10",
+      "pri": 79.97468086348238,
+      "n_articles": 1,
+      "mean_sentiment": 0.9995538592338562,
+      "negative_share": 0.0,
+      "political_share": 1.0,
+      "crime_share": 0.0,
+      "event": null
+    },
+    {
+      "week": "2023-08-21",
+      "pri": 79.92947830370699,
+      "n_articles": 1,
+      "mean_sentiment": 0.9991003274917604,
+      "negative_share": 0.0,
+      "political_share": 1.0,
+      "crime_share": 0.0,
+      "event": null
+    },
+    {
+      "week": "2023-08-28",
+      "pri": 89.82875423996775,
+      "n_articles": 1,
+      "mean_sentiment": 0.9980897307395936,
+      "negative_share": 0.0,
+      "political_share": 0.0,
+      "crime_share": 1.0,
+      "event": null
+    },
+    {
+      "week": "2023-09-25",
+      "pri": 56.64488043435804,
+      "n_articles": 144,
+      "mean_sentiment": 0.948029189887974,
+      "negative_share": 0.5694444444444444,
+      "political_share": 0.7916666666666666,
+      "crime_share": 0.5277777777777778,
+      "event": null
+    },
+    {
+      "week": "2024-07-15",
+      "pri": 84.7860467616887,
+      "n_articles": 2,
+      "mean_sentiment": 0.9976612329483032,
+      "negative_share": 0.0,
+      "political_share": 0.5,
+      "crime_share": 0.5,
+      "event": null
+    },
+    {
+      "week": "2024-07-29",
+      "pri": 44.28236035303622,
+      "n_articles": 1,
+      "mean_sentiment": 0.9424409866333008,
+      "negative_share": 1.0,
+      "political_share": 1.0,
+      "crime_share": 0.0,
+      "event": null
+    },
+    {
+      "week": "2024-08-12",
+      "pri": 89.33212609013157,
+      "n_articles": 1,
+      "mean_sentiment": 0.9931069016456604,
+      "negative_share": 0.0,
+      "political_share": 0.0,
+      "crime_share": 1.0,
+      "event": null
+    },
+    {
+      "week": "2024-09-23",
+      "pri": 84.786934891888,
+      "n_articles": 2,
+      "mean_sentiment": 0.9976701438426973,
+      "negative_share": 0.5,
+      "political_share": 0.0,
+      "crime_share": 0.0,
+      "event": null
+    },
+    {
+      "week": "2024-10-07",
+      "pri": 98.63888551838365,
+      "n_articles": 1,
+      "mean_sentiment": 0.986151397228241,
+      "negative_share": 0.0,
+      "political_share": 0.0,
+      "crime_share": 0.0,
+      "event": null
+    },
+    {
+      "week": "2024-10-28",
+      "pri": 99.86567550544338,
+      "n_articles": 1,
+      "mean_sentiment": 0.9984601736068726,
+      "negative_share": 0.0,
+      "political_share": 0.0,
+      "crime_share": 0.0,
+      "event": null
+    },
+    {
+      "week": "2025-02-17",
+      "pri": 40.87230276863452,
+      "n_articles": 1,
+      "mean_sentiment": 0.9082267880439758,
+      "negative_share": 1.0,
+      "political_share": 1.0,
+      "crime_share": 0.0,
+      "event": null
+    },
+    {
+      "week": "2025-03-10",
+      "pri": 69.93988041727863,
+      "n_articles": 1,
+      "mean_sentiment": 0.999204695224762,
+      "negative_share": 0.0,
+      "political_share": 1.0,
+      "crime_share": 1.0,
+      "event": null
+    },
+    {
+      "week": "2025-03-24",
+      "pri": 89.70293084450935,
+      "n_articles": 1,
+      "mean_sentiment": 0.9968273043632508,
+      "negative_share": 0.0,
+      "political_share": 0.0,
+      "crime_share": 1.0,
+      "event": null
+    },
+    {
+      "week": "2025-03-31",
+      "pri": 2.0123010488104778,
+      "n_articles": 1,
+      "mean_sentiment": 0.6186651587486267,
+      "negative_share": 1.0,
+      "political_share": 1.0,
+      "crime_share": 1.0,
+      "event": null
+    },
+    {
+      "week": "2025-04-14",
+      "pri": 69.91592169424352,
+      "n_articles": 1,
+      "mean_sentiment": 0.9989643096923828,
+      "negative_share": 0.0,
+      "political_share": 1.0,
+      "crime_share": 1.0,
+      "event": null
+    },
+    {
+      "week": "2025-04-28",
+      "pri": 49.07476808737301,
+      "n_articles": 2,
+      "mean_sentiment": 0.8400249481201172,
+      "negative_share": 0.5,
+      "political_share": 1.0,
+      "crime_share": 0.0,
+      "event": null
+    },
+    {
+      "week": "2025-05-05",
+      "pri": 51.873898284141376,
+      "n_articles": 1,
+      "mean_sentiment": 0.8179429173469543,
+      "negative_share": 1.0,
+      "political_share": 0.0,
+      "crime_share": 0.0,
+      "event": null
+    },
+    {
+      "week": "2025-05-12",
+      "pri": 93.85931037432609,
+      "n_articles": 2,
+      "mean_sentiment": 0.9381963908672332,
+      "negative_share": 0.0,
+      "political_share": 0.0,
+      "crime_share": 0.0,
+      "event": null
+    },
+    {
+      "week": "2025-05-19",
+      "pri": 65.00662384730576,
+      "n_articles": 2,
+      "mean_sentiment": 0.7992079555988312,
+      "negative_share": 0.5,
+      "political_share": 0.0,
+      "crime_share": 0.0,
+      "event": null
+    },
+    {
+      "week": "2025-05-26",
+      "pri": 68.22990007644158,
+      "n_articles": 1,
+      "mean_sentiment": 0.9820479154586792,
+      "negative_share": 0.0,
+      "political_share": 1.0,
+      "crime_share": 1.0,
+      "event": null
+    },
+    {
+      "week": "2025-06-02",
+      "pri": 88.8669151748035,
+      "n_articles": 2,
+      "mean_sentiment": 0.988439291715622,
+      "negative_share": 0.0,
+      "political_share": 0.5,
+      "crime_share": 0.0,
+      "event": null
+    },
+    {
+      "week": "2025-06-09",
+      "pri": 68.93155337981808,
+      "n_articles": 4,
+      "mean_sentiment": 0.8385880291461945,
+      "negative_share": 0.25,
+      "political_share": 0.25,
+      "crime_share": 0.25,
+      "event": null
+    },
+    {
+      "week": "2025-07-07",
+      "pri": 21.15637225249572,
+      "n_articles": 1,
+      "mean_sentiment": 0.8107437491416931,
+      "negative_share": 1.0,
+      "political_share": 1.0,
+      "crime_share": 1.0,
+      "event": null
+    },
+    {
+      "week": "2025-07-14",
+      "pri": 27.381486227966988,
+      "n_articles": 1,
+      "mean_sentiment": 0.7728691101074219,
+      "negative_share": 1.0,
+      "political_share": 1.0,
+      "crime_share": 0.0,
+      "event": null
+    },
+    {
+      "week": "2025-08-18",
+      "pri": 51.25473712757012,
+      "n_articles": 2,
+      "mean_sentiment": 0.9622304737567902,
+      "negative_share": 0.5,
+      "political_share": 1.0,
+      "crime_share": 1.0,
+      "event": null
+    },
+    {
+      "week": "2025-08-25",
+      "pri": 71.49438500226316,
+      "n_articles": 3,
+      "mean_sentiment": 0.9813571373621622,
+      "negative_share": 0.0,
+      "political_share": 1.0,
+      "crime_share": 0.6666666666666666,
+      "event": null
+    },
+    {
+      "week": "2025-09-01",
+      "pri": 49.39466649597142,
+      "n_articles": 2,
+      "mean_sentiment": 0.9937343895435332,
+      "negative_share": 1.0,
+      "political_share": 1.0,
+      "crime_share": 0.0,
+      "event": null
+    },
+    {
+      "week": "2025-09-08",
+      "pri": 84.84829904502243,
+      "n_articles": 2,
+      "mean_sentiment": 0.9982858300209044,
+      "negative_share": 0.0,
+      "political_share": 0.5,
+      "crime_share": 0.5,
+      "event": null
+    },
+    {
+      "week": "2025-09-15",
+      "pri": 58.57987387066005,
+      "n_articles": 2,
+      "mean_sentiment": 0.9855593144893646,
+      "negative_share": 0.5,
+      "political_share": 1.0,
+      "crime_share": 0.5,
+      "event": null
+    },
+    {
+      "week": "2025-09-29",
+      "pri": 67.92968830639958,
+      "n_articles": 1,
+      "mean_sentiment": 0.9790357947349548,
+      "negative_share": 0.0,
+      "political_share": 1.0,
+      "crime_share": 1.0,
+      "event": null
+    },
+    {
+      "week": "2025-10-06",
+      "pri": 39.24599825314593,
+      "n_articles": 1,
+      "mean_sentiment": 0.9922427535057068,
+      "negative_share": 1.0,
+      "political_share": 1.0,
+      "crime_share": 1.0,
+      "event": null
+    },
+    {
+      "week": "2025-10-20",
+      "pri": 80.0,
+      "n_articles": 1,
+      "mean_sentiment": 0.9998078942298888,
+      "negative_share": 0.0,
+      "political_share": 1.0,
+      "crime_share": 0.0,
+      "event": null
+    },
+    {
+      "week": "2025-12-01",
+      "pri": 69.06192064541818,
+      "n_articles": 1,
+      "mean_sentiment": 0.9903958439826964,
+      "negative_share": 0.0,
+      "political_share": 1.0,
+      "crime_share": 1.0,
+      "event": null
+    },
+    {
+      "week": "2025-12-15",
+      "pri": 38.17526967301217,
+      "n_articles": 1,
+      "mean_sentiment": 0.9814997911453248,
+      "negative_share": 1.0,
+      "political_share": 1.0,
+      "crime_share": 1.0,
+      "event": null
+    },
+    {
+      "week": "2026-01-05",
+      "pri": 59.54642760023509,
+      "n_articles": 2,
+      "mean_sentiment": 0.8447572588920593,
+      "negative_share": 0.0,
+      "political_share": 1.0,
+      "crime_share": 0.5,
+      "event": null
+    },
+    {
+      "week": "2026-01-12",
+      "pri": 49.29645830607433,
+      "n_articles": 1,
+      "mean_sentiment": 0.992749035358429,
+      "negative_share": 1.0,
+      "political_share": 1.0,
+      "crime_share": 0.0,
+      "event": null
+    },
+    {
+      "week": "2026-01-19",
+      "pri": 0.0,
+      "n_articles": 1,
+      "mean_sentiment": 0.5984750986099243,
+      "negative_share": 1.0,
+      "political_share": 1.0,
+      "crime_share": 1.0,
+      "event": null
+    },
+    {
+      "week": "2026-03-09",
+      "pri": 81.19308559451332,
+      "n_articles": 3,
+      "mean_sentiment": 0.9448897043863932,
+      "negative_share": 0.0,
+      "political_share": 0.3333333333333333,
+      "crime_share": 0.6666666666666666,
+      "event": null
+    },
+    {
+      "week": "2026-03-16",
+      "pri": 56.61010802069196,
+      "n_articles": 2,
+      "mean_sentiment": 0.965796023607254,
+      "negative_share": 0.5,
+      "political_share": 1.0,
+      "crime_share": 0.5,
+      "event": null
+    },
+    {
+      "week": "2026-03-23",
+      "pri": 55.9945610193715,
+      "n_articles": 7,
+      "mean_sentiment": 0.9739533577646527,
+      "negative_share": 0.5714285714285714,
+      "political_share": 1.0,
+      "crime_share": 0.4285714285714285,
+      "event": null
+    },
+    {
+      "week": "2026-03-30",
+      "pri": 58.395249127204174,
+      "n_articles": 5,
+      "mean_sentiment": 0.9837069153785706,
+      "negative_share": 0.6,
+      "political_share": 0.8,
+      "crime_share": 0.6,
+      "event": null
+    },
+    {
+      "week": "2026-04-06",
+      "pri": 41.31607710547709,
+      "n_articles": 9,
+      "mean_sentiment": 0.9349755843480428,
+      "negative_share": 0.8888888888888888,
+      "political_share": 0.8888888888888888,
+      "crime_share": 0.7777777777777778,
+      "event": null
+    },
+    {
+      "week": "2026-04-13",
+      "pri": 60.05730444761645,
+      "n_articles": 8,
+      "mean_sentiment": 0.9502162486314774,
+      "negative_share": 0.5,
+      "political_share": 0.75,
+      "crime_share": 0.5,
+      "event": null
+    },
+    {
+      "week": "2026-04-20",
+      "pri": 53.96311235500496,
+      "n_articles": 16,
+      "mean_sentiment": 0.9329670444130898,
+      "negative_share": 0.6875,
+      "political_share": 0.6875,
+      "crime_share": 0.5,
+      "event": null
+    },
+    {
+      "week": "2026-04-27",
+      "pri": 59.6934829074119,
+      "n_articles": 17,
+      "mean_sentiment": 0.9377129814204048,
+      "negative_share": 0.4705882352941176,
+      "political_share": 0.8235294117647058,
+      "crime_share": 0.3529411764705882,
+      "event": null
+    },
+    {
+      "week": "2026-05-04",
+      "pri": 62.01590047297625,
+      "n_articles": 117,
+      "mean_sentiment": 0.9505726231469048,
+      "negative_share": 0.5299145299145299,
+      "political_share": 0.6324786324786325,
+      "crime_share": 0.452991452991453,
+      "event": null
+    }
+  ],
+  "topics": [
+    {
+      "id": 4,
+      "label": "Elections & national politics",
+      "keywords": [
+        "act",
+        "barrow",
+        "country",
+        "democratic",
+        "election",
+        "fact",
+        "gambia",
+        "gambian"
+      ],
+      "n_articles": 77,
+      "mean_sentiment": 0.9399809806377857,
+      "negative_share": 0.6103896103896104,
+      "positive_share": 0.38961038961038963,
+      "sample_positive": [
+        {
+          "headline": "Why Seeking a Third Term Could Be President Adama Barrow\u2019s Worst Political Decision",
+          "source": "Alkamba Times",
+          "url": "https://alkambatimes.com/why-seeking-a-third-term-could-be-president-adama-barrows-worst-political-decision/"
+        },
+        {
+          "headline": "GMC Leader Cries Foul",
+          "source": "Kaironews",
+          "url": "https://kaironews.com/2021/11/07/31139-2/"
+        }
+      ],
+      "sample_negative": [
+        {
+          "headline": "Gambia\u2019s Election Battle Begins",
+          "source": "Kaironews",
+          "url": "https://kaironews.com/2021/11/06/gambias-election-battle-begins/"
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "label": "Courts & justice",
+      "keywords": [
+        "case",
+        "commission",
+        "country",
+        "court",
+        "crime",
+        "criminal",
+        "gambia",
+        "gambian"
+      ],
+      "n_articles": 71,
+      "mean_sentiment": 0.9350334498244273,
+      "negative_share": 0.704225352112676,
+      "positive_share": 0.29577464788732394,
+      "sample_positive": [
+        {
+          "headline": "Barrow Suspends License of Fatal Medicine Importer",
+          "source": "Kaironews",
+          "url": "https://kaironews.com/2022/10/09/barrow-suspends-license-of-fatal-medicine-importer/"
+        },
+        {
+          "headline": "Gambian Migrant Boat Sinks Off Mauritania, Dozens Feared Dead",
+          "source": "Alkamba Times",
+          "url": "https://alkambatimes.com/gambian-migrant-boat-sinks-off-mauritania-dozens-feared-dead/"
+        }
+      ],
+      "sample_negative": [
+        {
+          "headline": "URGENT CALL FOR JUSTICE AND FULL REPARATIONS FOR APRIL 10\u201311 VICTIMS",
+          "source": "Foroyaa",
+          "url": "https://foroyaa.net/urgent-call-for-justice-and-full-reparations-for-april-10-11-victims/"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "label": "Governance & Jammeh era",
+      "keywords": [
+        "african",
+        "community",
+        "country",
+        "development",
+        "gambia",
+        "gambian",
+        "government",
+        "justice"
+      ],
+      "n_articles": 60,
+      "mean_sentiment": 0.9656904707352321,
+      "negative_share": 0.36666666666666664,
+      "positive_share": 0.6333333333333333,
+      "sample_positive": [
+        {
+          "headline": "Congratulations To Fatou Bensouda",
+          "source": "Kaironews",
+          "url": "https://kaironews.com/2021/07/14/congratulations-to-fatou-bensouda/"
+        },
+        {
+          "headline": "Tribute To Our Beloved Mamakoto",
+          "source": "Kaironews",
+          "url": "https://kaironews.com/2022/05/31/tribute-to-our-beloved-mamakoto/"
+        }
+      ],
+      "sample_negative": [
+        {
+          "headline": "Why Nigeria Gold Medalist Shed Tears",
+          "source": "Kaironews",
+          "url": "https://kaironews.com/2022/08/31/why-nigeria-gold-medalist-shed-tear/"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "label": "Africa & media",
+      "keywords": [
+        "africa",
+        "african",
+        "child",
+        "country",
+        "day",
+        "emotional",
+        "family",
+        "government"
+      ],
+      "n_articles": 49,
+      "mean_sentiment": 0.9554737660349631,
+      "negative_share": 0.5714285714285714,
+      "positive_share": 0.42857142857142855,
+      "sample_positive": [
+        {
+          "headline": "Six Leadership Principles To Learn From An Eagle",
+          "source": "Kaironews",
+          "url": "https://kaironews.com/2022/08/10/six-leadership-principles-to-learn-from-an-eagle/"
+        },
+        {
+          "headline": "Long lines, unpaid TSA workers: Experts say US air travel system in crisis",
+          "source": "Alkamba Times",
+          "url": "https://alkambatimes.com/long-lines-unpaid-tsa-workers-experts-say-us-air-travel-system-in-crisis/"
+        }
+      ],
+      "sample_negative": [
+        {
+          "headline": "Senegalese Navy Rescue 153 Migrants",
+          "source": "Foroyaa",
+          "url": "https://foroyaa.net/senegalese-navy-rescue-153-migrants/"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "label": "Health, business & agriculture",
+      "keywords": [
+        "business",
+        "child",
+        "community",
+        "company",
+        "country",
+        "development",
+        "education",
+        "farmer"
+      ],
+      "n_articles": 39,
+      "mean_sentiment": 0.9458260505627363,
+      "negative_share": 0.38461538461538464,
+      "positive_share": 0.6153846153846154,
+      "sample_positive": [
+        {
+          "headline": "Reliance Financial Services Celebrates International Rural Women\u2019s Day in Grand Style",
+          "source": "Foroyaa",
+          "url": "https://foroyaa.net/reliance-financial-services-celebrates-international-rural-womens-day-in-grand-style/"
+        },
+        {
+          "headline": "GTBoard Strengthens Tourism Partnership With Craft Traders, Tourist Guides",
+          "source": "The Voice",
+          "url": "https://www.voicegambia.com/2026/04/28/gtboard-strengthens-tourism-partnership-with-craft-traders-tourist-guides/"
+        }
+      ],
+      "sample_negative": [
+        {
+          "headline": "Goat scheme offers \u201cresilient package\u201d for Gambian farmers, officials say",
+          "source": "Foroyaa",
+          "url": "https://foroyaa.net/goat-scheme-offers-resilient-package-for-gambian-farmers-officials-say/"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "label": "Sports",
+      "keywords": [
+        "african",
+        "club",
+        "country",
+        "cup",
+        "fifa",
+        "final",
+        "football",
+        "gambia"
+      ],
+      "n_articles": 34,
+      "mean_sentiment": 0.9150676218902364,
+      "negative_share": 0.29411764705882354,
+      "positive_share": 0.7058823529411765,
+      "sample_positive": [
+        {
+          "headline": "Ousman Camara Emerges as Rising Star After Impressive Season in Gambian League",
+          "source": "The Voice",
+          "url": "https://www.voicegambia.com/2026/05/08/ousman-camara-emerges-as-rising-star-after-impressive-season-in-gambian-league/"
+        },
+        {
+          "headline": "Gambia Qualifies African Cup of Nations",
+          "source": "Kaironews",
+          "url": "https://kaironews.com/2023/09/11/gambia-qualifies-african-cup-of-nations/"
+        }
+      ],
+      "sample_negative": [
+        {
+          "headline": "Young\u00a0Scorpions\u00a0resume training despite postponement of WAFU A&B U20 Boys Cup",
+          "source": "Foroyaa",
+          "url": "https://foroyaa.net/young-scorpions-resume-training-despite-postponement-of-wafu-ab-u20-boys-cup/"
+        }
+      ]
+    },
+    {
+      "id": 0,
+      "label": "Economy & finance",
+      "keywords": [
+        "africa",
+        "african",
+        "bank",
+        "climate",
+        "cost",
+        "country",
+        "development",
+        "economic"
+      ],
+      "n_articles": 33,
+      "mean_sentiment": 0.9566306598258741,
+      "negative_share": 0.36363636363636365,
+      "positive_share": 0.6363636363636364,
+      "sample_positive": [
+        {
+          "headline": "Good Morning Mr President: Address the Cost of Living",
+          "source": "The Point",
+          "url": "https://thepoint.gm/africa/gambia/editorial/good-morning-mr-president-address-the-cost-of-living"
+        },
+        {
+          "headline": "Saidy Elected President of African Central Banks",
+          "source": "Kaironews",
+          "url": "https://kaironews.com/2022/08/05/saidy-elected-president-of-african-central-banks/"
+        }
+      ],
+      "sample_negative": [
+        {
+          "headline": "AI STRATEGY FOR AFRICA",
+          "source": "Alkamba Times",
+          "url": "https://alkambatimes.com/ai-strategy-for-africa/"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "label": "Courts & justice",
+      "keywords": [
+        "accused",
+        "accused person",
+        "alleged",
+        "case",
+        "court",
+        "evidence",
+        "investigation",
+        "justice"
+      ],
+      "n_articles": 28,
+      "mean_sentiment": 0.964095305119242,
+      "negative_share": 0.8214285714285714,
+      "positive_share": 0.17857142857142858,
+      "sample_positive": [
+        {
+          "headline": "A Tribute To A Life-long Friend",
+          "source": "Kaironews",
+          "url": "https://kaironews.com/2023/01/22/a-tribute-to-a-life-long-friend/"
+        },
+        {
+          "headline": "Bojang\u2019s Acquittal Undermined by Re-Arrest as Brufut Protests Turn Violent",
+          "source": "Foroyaa",
+          "url": "https://foroyaa.net/bojangs-acquittal-undermined-by-re-arrest-as-brufut-protests-turn-violent/"
+        }
+      ],
+      "sample_negative": [
+        {
+          "headline": "Echoes of Fuladu 3: Like vultures around something fresh",
+          "source": "Standard",
+          "url": "https://standard.gm/echoes-of-fuladu-3-like-vultures-around-something-fresh/"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "source": "Kaironews",
+      "n_articles": 144,
+      "mean_sentiment": 0.948029189887974,
+      "negative_share": 0.5694444444444444,
+      "positive_share": 0.4305555555555556
+    },
+    {
+      "source": "Foroyaa",
+      "n_articles": 79,
+      "mean_sentiment": 0.9300076199483268,
+      "negative_share": 0.5443037974683544,
+      "positive_share": 0.45569620253164556
+    },
+    {
+      "source": "Standard",
+      "n_articles": 62,
+      "mean_sentiment": 0.9368722621471651,
+      "negative_share": 0.5161290322580645,
+      "positive_share": 0.4838709677419355
+    },
+    {
+      "source": "Alkamba Times",
+      "n_articles": 58,
+      "mean_sentiment": 0.9530341029167175,
+      "negative_share": 0.603448275862069,
+      "positive_share": 0.39655172413793105
+    },
+    {
+      "source": "The Voice",
+      "n_articles": 37,
+      "mean_sentiment": 0.9743628936844904,
+      "negative_share": 0.35135135135135137,
+      "positive_share": 0.6486486486486487
+    },
+    {
+      "source": "The Point",
+      "n_articles": 11,
+      "mean_sentiment": 0.9716598228974775,
+      "negative_share": 0.18181818181818182,
+      "positive_share": 0.8181818181818182
+    }
+  ],
+  "sentiment_distribution": {
+    "positive": 184,
+    "negative": 207,
+    "neutral": 0
+  },
+  "most_positive": [
+    {
+      "headline": "Why Seeking a Third Term Could Be President Adama Barrow\u2019s Worst Political Decision",
+      "source": "Alkamba Times",
+      "date": "2026-04-12",
+      "url": "https://alkambatimes.com/why-seeking-a-third-term-could-be-president-adama-barrows-worst-political-decision/",
+      "sentiment": 0.9998124241828918
+    },
+    {
+      "headline": "Ousman Camara Emerges as Rising Star After Impressive Season in Gambian League",
+      "source": "The Voice",
+      "date": "2026-05-08",
+      "url": "https://www.voicegambia.com/2026/05/08/ousman-camara-emerges-as-rising-star-after-impressive-season-in-gambian-league/",
+      "sentiment": 0.9997811913490297
+    },
+    {
+      "headline": "Heartfelt appreciation for the transformative road construction and electrification of Kiang West District",
+      "source": "The Point",
+      "date": "2026-05-10",
+      "url": "https://thepoint.gm/africa/gambia/opinion/heartfelt-appreciation-for-the-transformative-road-construction-and-electrification-of-kiang-west-district",
+      "sentiment": 0.9996898174285888
+    },
+    {
+      "headline": "GTBoard Strengthens Tourism Partnership With Craft Traders, Tourist Guides",
+      "source": "The Voice",
+      "date": "2026-04-28",
+      "url": "https://www.voicegambia.com/2026/04/28/gtboard-strengthens-tourism-partnership-with-craft-traders-tourist-guides/",
+      "sentiment": 0.9995792508125304
+    },
+    {
+      "headline": "Gambian Migrant Boat Sinks Off Mauritania, Dozens Feared Dead",
+      "source": "Alkamba Times",
+      "date": "2026-04-26",
+      "url": "https://alkambatimes.com/gambian-migrant-boat-sinks-off-mauritania-dozens-feared-dead/",
+      "sentiment": 0.9994749426841736
+    }
+  ],
+  "most_negative": [
+    {
+      "headline": "Goat scheme offers \u201cresilient package\u201d for Gambian farmers, officials say",
+      "source": "Foroyaa",
+      "date": "2026-04-29",
+      "url": "https://foroyaa.net/goat-scheme-offers-resilient-package-for-gambian-farmers-officials-say/",
+      "sentiment": 0.5636790990829468
+    },
+    {
+      "headline": "URGENT CALL FOR JUSTICE AND FULL REPARATIONS FOR APRIL 10\u201311 VICTIMS",
+      "source": "Foroyaa",
+      "date": "2026-04-10",
+      "url": "https://foroyaa.net/urgent-call-for-justice-and-full-reparations-for-april-10-11-victims/",
+      "sentiment": 0.5670872330665588
+    },
+    {
+      "headline": "Coroner Recommends Prosecution of Policemen Involved in Omar Badjie\u2019s Death",
+      "source": "Foroyaa",
+      "date": "2026-04-21",
+      "url": "https://foroyaa.net/coroner-recommends-prosecution-of-policemen-involved-in-omar-badjies-death/",
+      "sentiment": 0.5694884657859802
+    },
+    {
+      "headline": "Editor\u2019s Pick: Gambians Seek Grand Opposition Coalition Ousting Barrow. A Thought for Opposition Parties Amid Coalition Talks",
+      "source": "Alkamba Times",
+      "date": "2026-01-19",
+      "url": "https://alkambatimes.com/editors-pick-gambians-seek-grand-opposition-coalition-ousting-barrow-a-thought-for-opposition-parties-amid-coalition-talks/",
+      "sentiment": 0.5984750986099243
+    },
+    {
+      "headline": "Don\u2019t be like Senegal, Fifa president warns teams ahead of World Cup",
+      "source": "Standard",
+      "date": "2026-05-05",
+      "url": "https://standard.gm/dont-be-like-senegal-fifa-president-warns-teams-ahead-of-world-cup/",
+      "sentiment": 0.6107547879219055
+    }
+  ],
+  "generated_at": "2026-05-11T12:47:24Z"
+}
