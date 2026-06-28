@@ -31,7 +31,7 @@ from .features import FeatureBundle  # noqa: F401  needed for pickle.load
 OUT_PATH = Path("dashboard/public/data/dashboard.json")
 N_CLUSTERS = 8
 
-# Hand-curated cluster labels keyed on dominant terms — see notebook output
+# Hand-curated cluster labels keyed on dominant terms - see notebook output
 HUMAN_LABELS: dict[frozenset, str] = {
     frozenset({"bank", "cost", "economic", "financial"}): "Economy & finance",
     frozenset({"jammeh", "government", "crime"}): "Governance & Jammeh era",
