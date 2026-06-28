@@ -36,8 +36,8 @@ news scrape → preprocessing → features → sentiment + topics → weekly PRI
 - Output: `data/features/article_features.pkl`
 
 ### 4. Sentiment (`src/sentiment.py`, notebook 05)
-- **VADER** (NLTK lexicon, baseline) — applied to headline and body separately
-- **distilBERT-SST2** — applied to headlines (truncated 512 tokens)
+- **VADER** (NLTK lexicon, baseline) - applied to headline and body separately
+- **distilBERT-SST2** - applied to headlines (truncated 512 tokens)
 - Manual labelling of 200 random articles for evaluation
 - Compare on accuracy, precision, recall, F1, AUC; pick the winner
 - Output: `data/features/sentiment_scores.csv`
@@ -70,15 +70,15 @@ Output: `outputs/political_risk_index.csv` + annotated chart.
 Top 20 features driving sentiment classification, force plots for 3 example articles, plain-English narrative of what the model has learned about Gambian political vocabulary.
 
 ### 8. API (`api/main.py`, FastAPI)
-- `POST /analyze` — sentiment + topic + risk-contribution for any text
-- `GET /risk-index` — full weekly PRI as JSON
-- `GET /risk-index/current` — latest week, trend vs 4 weeks ago
+- `POST /analyze` - sentiment + topic + risk-contribution for any text
+- `GET /risk-index` - full weekly PRI as JSON
+- `GET /risk-index/current` - latest week, trend vs 4 weeks ago
 
 ### 9. Dashboard (`dashboard/`, Next.js 16 + Recharts)
-- Page 1 — PRI line chart with event annotations + current score
-- Page 2 — Analyse-text box
-- Page 3 — Topic explorer
-- Page 4 — Data overview
+- Page 1 - PRI line chart with event annotations + current score
+- Page 2 - Analyse-text box
+- Page 3 - Topic explorer
+- Page 4 - Data overview
 
 ## Why these choices
 
@@ -140,7 +140,7 @@ gambia-news-sentiment/
 - Coverage skewed toward English-language sources. Wolof, Mandinka, Fula print is not in the corpus.
 - Sentiment labels (positive/negative/neutral) are evaluated against my own 200-article manual sample. A larger labelling effort is needed for a publishable accuracy claim.
 - distilBERT-SST2 was trained on movie reviews. It transfers reasonably but a fine-tune on Gambian political language would improve precision.
-- The PRI is one signal among many. It does not replace structured economic indicators or formal political risk assessments — it complements them.
+- The PRI is one signal among many. It does not replace structured economic indicators or formal political risk assessments - it complements them.
 
 ## What's next
 
