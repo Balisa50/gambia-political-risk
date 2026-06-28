@@ -185,7 +185,7 @@ export default function HomePage() {
               </BarChart>
             </ResponsiveContainer>
           </div>
-          <p className="mt-2 text-[11px] text-white/40">Bar colour reflects the newspaper&apos;s average tone — green leans positive, red leans negative.</p>
+          <p className="mt-2 text-[11px] text-white/40">Bar colour reflects the newspaper&apos;s average tone - green leans positive, red leans negative.</p>
         </div>
       </section>
 
