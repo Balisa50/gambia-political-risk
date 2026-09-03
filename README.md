@@ -1,6 +1,6 @@
 # Gambia News Sentiment Analyzer & Political Risk Index
 
-End-to-end NLP pipeline that scrapes Gambian news, runs sentiment + topic analysis, and produces a weekly Political Risk Index (PRI) for The Gambia. Every step is documented, every technical choice is justified.
+End-to-end NLP pipeline that scrapes Gambian news, runs sentiment + topic analysis, and produces a weekly Political Risk Index (PRI) for The Gambia.
 
 **Live demo**: Dashboard on Vercel · API on Render
 **Data sources**: The Point Newspaper, Foroyaa, Gainako, Standard Newspaper
